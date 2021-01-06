@@ -1,5 +1,6 @@
 package com.atguigu.interceptor;
 
+import org.apache.flume.Context;
 import org.apache.flume.Event;
 import org.apache.flume.interceptor.Interceptor;
 
@@ -35,15 +36,24 @@ public class TypeInterceptor implements Interceptor {
         return event;
     }
 
-    public List<Event> intercept(List<Event> list) {
-        for (Event event : list) {
+    public List<Event> intercept(List<Event> events) {
+        for (Event event : events) {
             intercept(event);
         }
-
-        return null;
+        return events;
     }
 
     public void close() {
 
+    }
+
+    public static class Builder implements Interceptor.Builder {
+        public Interceptor build() {
+            return new TypeInterceptor();
+        }
+
+        public void configure(Context context) {
+
+        }
     }
 }
