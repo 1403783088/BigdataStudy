@@ -31,7 +31,7 @@ public class MyProducer {
         Producer<String, String> producer = new KafkaProducer<String, String>(properties);
 
         for (int i = 0; i < 10; i++) {
-            producer.send(new ProducerRecord<String, String>("first", "atguigu--"+i));
+            producer.send(new ProducerRecord<String, String>("first", "atguigu", "atguigu--"+i));
         }
         producer.close();
     }
