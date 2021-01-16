@@ -1,11 +1,9 @@
 package com.atguigu.consumer;
 
 import org.apache.kafka.clients.consumer.*;
+import org.apache.kafka.common.TopicPartition;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Properties;
+import java.util.*;
 
 public class MyConsumer {
     public static void main(String[] args) {
@@ -41,6 +39,17 @@ public class MyConsumer {
             for (ConsumerRecord<String, String> consumerRecord : consumerRecords) {
                 System.out.println(consumerRecord.key() + "--" + consumerRecord.value() + "--" + consumerRecord.partition());
             }
+
+            //同步提交，当前线程会阻塞直到offset提交成功
+//            consumer.commitSync();
+            //异步提交
+            consumer.commitAsync(new OffsetCommitCallback() {
+                public void onComplete(Map<TopicPartition, OffsetAndMetadata> offsets, Exception exception) {
+                    if(exception != null){
+                        System.err.println("Commit failed for" + offsets);
+                    }
+                }
+            });
         }
 
     }
