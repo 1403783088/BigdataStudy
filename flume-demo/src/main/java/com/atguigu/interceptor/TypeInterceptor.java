@@ -28,9 +28,9 @@ public class TypeInterceptor implements Interceptor {
         //3.根据body中是否有"hello"来决定添加怎样的头信息
         if(eventBody.contains("hello")){
             //4.添加头信息
-            eventHeaders.put("type", "atguigu");
+            eventHeaders.put("topic", "first");
         }else{
-            eventHeaders.put("type", "notatguigu");
+            eventHeaders.put("topic", "second");
         }
 
         return event;

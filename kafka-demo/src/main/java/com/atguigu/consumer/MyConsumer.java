@@ -20,7 +20,7 @@ public class MyConsumer {
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
 
         //消费者组
-        properties.put(ConsumerConfig.GROUP_ID_CONFIG, "bigdata2");
+        properties.put(ConsumerConfig.GROUP_ID_CONFIG, "bigdata5");
 
         //重置消费者的offset
         properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
@@ -29,7 +29,7 @@ public class MyConsumer {
         KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(properties);
 
         //订阅主题
-        consumer.subscribe(Arrays.asList("first", "third"));
+        consumer.subscribe(Arrays.asList("first", "second"));
 
         while (true) {
             //获取数据
@@ -37,7 +37,7 @@ public class MyConsumer {
 
             //解析并打印consumerRecords
             for (ConsumerRecord<String, String> consumerRecord : consumerRecords) {
-                System.out.println(consumerRecord.key() + "--" + consumerRecord.value() + "--" + consumerRecord.partition());
+                System.out.println("topic: " + consumerRecord.topic() + "  " + "partition: " + consumerRecord.partition() + "  " + consumerRecord.key() + "--" + consumerRecord.value());
             }
 
             //同步提交，当前线程会阻塞直到offset提交成功

@@ -30,12 +30,14 @@ public class InterceptorProducer {
 
         //9.添加拦截器
         ArrayList<String> interceptors = new ArrayList<String>();
-        properties.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, "");
+        interceptors.add("com.atguigu.interceptor.TimeInterceptor");
+        interceptors.add("com.atguigu.interceptor.CounterInceprotor");
+        properties.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, interceptors);
 
         Producer<String, String> producer = new KafkaProducer<String, String>(properties);
 
-        for (int i = 0; i < 10; i++) {
-            producer.send(new ProducerRecord<String, String>("first", "atguigu", "atguigu--"+i));
+        for (int i = 0; i < 10000; i++) {
+            producer.send(new ProducerRecord<String, String>("first", "atguigu", "message"+i));
         }
         producer.close();
     }
