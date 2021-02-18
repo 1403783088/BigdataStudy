@@ -45,6 +45,7 @@ public class MyConsumer {
             //异步提交
             consumer.commitAsync(new OffsetCommitCallback() {
                 public void onComplete(Map<TopicPartition, OffsetAndMetadata> offsets, Exception exception) {
+                    System.out.println(offsets);
                     if(exception != null){
                         System.err.println("Commit failed for" + offsets);
                     }

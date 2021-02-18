@@ -11,6 +11,7 @@
     <modules>
         <module>flume-demo</module>
         <module>kafka-demo</module>
+        <module>zookeeper-demo</module>
     </modules>
 
 
